@@ -1,0 +1,10 @@
+faster-whisper
+wavio
+sounddevice
+dotenv
+openai
+nvidia-cublas-cu12
+nvidia-cuda-nvrtc-cu12
+nvidia-cudnn-cu12
+#libportaudio2
+#rosdep install --from-paths src --ignore-src -r -y
