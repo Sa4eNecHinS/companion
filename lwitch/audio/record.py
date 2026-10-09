@@ -1,12 +1,13 @@
 import sounddevice as sd
 import wavio
+from pathlib import Path
 
 
 def record(
     path: str,
     duration: int,
     freq: int | None = 48_000,  # fifine's hz
-    device: str | None = "Fifine Microphone Mono",
+    device: str | None = None,
     dtype: str | None = "int16",
 ) -> bool:
     if duration < 0:
@@ -16,6 +17,7 @@ def record(
         return False
 
     try:
+        Path(path).mkdir(parents=True, exist_ok=True)
         recording = sd.rec(
             # общее число кадров за продолжительность duration
             int(duration * freq),
@@ -52,10 +54,17 @@ def check_device_features() -> dict:
 
 
 if __name__ == "__main__":
-    print("Start recording ...")
-    path = "/home/a_nyone/apps/ros2_ws/src/lwitch/lwitch/stt"
+    import argparse
 
-    if record(path, 3):
+    parser = argparse.ArgumentParser(description="Record a WAV file from a microphone.")
+    parser.add_argument("--output-dir", default="data")
+    parser.add_argument("--duration", type=int, default=3)
+    parser.add_argument("--device", default=None)
+    args = parser.parse_args()
+    print("Start recording ...")
+    path = args.output_dir
+
+    if record(path, args.duration, device=args.device):
         print("Voice input succefully recorded")
     else:
         print("ERROR")

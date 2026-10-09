@@ -3,7 +3,6 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 
-from lwitch.stt.record import record
 from lwitch.audio.recorder import Recorder
 from lwitch.audio.buffer import AudioBuffer
 

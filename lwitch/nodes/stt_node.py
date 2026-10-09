@@ -1,10 +1,8 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from lwitch.srv import CheckSafety
 
 from lwitch.stt.stt import speak_to_text
-from lwitch.llm.llm_client import ask_llm
 
 
 class SttNode(Node):
@@ -16,19 +14,8 @@ class SttNode(Node):
             10,  # размер очереди
         )
 
-        self.path = "src/lwitch/lwitch/stt/record.wav"
-        self.is_recording = False
-        self.duration = 3  # secs
-
-        self.srv_ = self.create_service(
-            CheckSafety,
-            "CheckSafety",
-            self.check_safety,
-        )
-
-        # self.subscriber_ = self.create_subscription(
-        #    String, "/voice_input", self.translate_speak, 10
-        # )
+        self.declare_parameter("audio_path", "data/record.wav")
+        self.path = self.get_parameter("audio_path").value
 
     def log_info(self, message):
         self.get_logger().info(message)
@@ -37,9 +24,6 @@ class SttNode(Node):
     def log_warning(self, message):
         self.get_logger().warning(message)
         # self.file_logger.warning(message)
-
-    def check_safety(self, request, response):
-        safe = request.input_text
 
     def translate_speak(self):
         msg = String()
@@ -50,6 +34,7 @@ class SttNode(Node):
 
         if not msg.data:
             self.log_warning("The voice input is empty")
+            return
 
         self.publisher_.publish(msg)
         self.log_info(
@@ -62,13 +47,6 @@ class SttNode(Node):
                 msg.data
             }\n"""
         )
-
-        response = ask_llm(user_input=info.get("text", None))
-        if not response:
-            self.log_info("LLM didnt response")
-            return
-
-        self.log_info(f"LLM: {response}")
 
 
 def main(args=None):

@@ -1,9 +1,9 @@
 from silero_vad import load_silero_vad, read_audio, get_speech_timestamps
 
 
-def vad():
+def vad(path: str):
     model = load_silero_vad()
-    wav = read_audio("/home/a_nyone/apps/ros2_ws/src/lwitch/lwitch/stt/record.wav")
+    wav = read_audio(path)
     speech_timestamps = get_speech_timestamps(
         wav,
         model,
@@ -14,5 +14,9 @@ def vad():
 
 
 if __name__ == "__main__":
-    res = vad()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Detect speech in an audio file.")
+    parser.add_argument("path", help="Path to an audio file")
+    res = vad(parser.parse_args().path)
     print(res)

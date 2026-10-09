@@ -3,15 +3,15 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
-from conversational_robot_pkg.utils.logger_config import setup_file_logger
-from conversational_robot_pkg.security.sanitizer import safe_text
+from lwitch.waf.utils.logger_config import setup_file_logger
+from lwitch.waf.security.sanitizer import safe_text
 
 
 class InputNode(Node):
     def __init__(self):
         super().__init__("input_node")
 
-        self.publisher_ = self.create_publisher(String, "/voice_input", 10)
+        self.publisher_ = self.create_publisher(String, "/stt_output", 10)
         self.file_logger = setup_file_logger("input_node")
 
         self.get_logger().info("Input node started")

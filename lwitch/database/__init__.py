@@ -1,3 +1,3 @@
-from conversational_robot_pkg.database.models import Dialogue
+from lwitch.database.models import Dialogue
 
 __all__ = ["Dialogue"]

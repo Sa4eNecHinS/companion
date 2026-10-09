@@ -1,5 +1,5 @@
-from conversational_robot_pkg.database.db import SessionLocal
-from conversational_robot_pkg.database.models import Dialogue
+from lwitch.database.db import SessionLocal
+from lwitch.database.models import Dialogue
 
 
 def create_dialogue(

@@ -1,6 +1,6 @@
 import re
 
-from conversational_robot_pkg.utils.sqli_patterns import SQLi_PATTERNS
+from lwitch.waf.utils.sqli_patterns import SQLi_PATTERNS
 
 
 def detect_sql_injection(text):

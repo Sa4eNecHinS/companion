@@ -4,7 +4,7 @@ from lwitch.audio.chunker import AudioChunker
 from lwitch.audio.microphone import Microphone
 
 
-class Recoder:
+class Recorder:
     def __init__(self, raw_buffer: AudioBuffer, pcm_buffer: AudioBuffer):
         self.raw_buffer = raw_buffer
         self.resampler = AudioResampler()
@@ -51,6 +51,6 @@ if __name__ == "__main__":
     raw_buffer = AudioBuffer()
     pcm_buffer = AudioBuffer()
 
-    recorder = Recoder(raw_buffer, pcm_buffer)
+    recorder = Recorder(raw_buffer, pcm_buffer)
 
     recorder.start()

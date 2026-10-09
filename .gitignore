@@ -12,6 +12,8 @@ build/
 # Virtual environments & uv
 .venv/
 .env
+.env.*
+!.env.example
 
 # IDE
 .vscode/
@@ -25,4 +27,9 @@ Thumbs.db
 
 install/
 log/
-build/
+logs/
+data/
+*.wav
+*.sqlite
+*.sqlite3
+.pytest_cache/

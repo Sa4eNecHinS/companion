@@ -1,7 +1,4 @@
-import threading
 import sounddevice as sd
-
-# from lwitch.log.logger import Logger
 
 
 class Microphone:
@@ -9,7 +6,7 @@ class Microphone:
         self,
         buffer,
         rate=48_000,
-        device="Fifine Microphone Mono",
+        device=None,
         channels=1,
         dtype="float32",
     ):
@@ -19,7 +16,6 @@ class Microphone:
         self.channels = channels
         self.dtype = dtype
 
-        # self.logger = Logger(__name__)
         self.stream = None
 
     def start(self):
@@ -50,15 +46,3 @@ class Microphone:
         # memory location, which means new rewrite old one, and at the end
         # without .copy in queue were only the new chunks
         self.buffer.push(indata.copy())
-
-
-if __name__ == "__main__":
-    from lwitch.audio.buffer import AudioBuffer
-
-    buf = AudioBuffer()
-    mic = Microphone(buf)
-    print("\nstart recording: ")
-    mic.microphone_recording()
-
-    print("queue size: ", len(buf))
-    print("dropped chunks: ", buf.dropped_chunks)

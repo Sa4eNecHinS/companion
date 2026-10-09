@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError, OperationalError
 
 
-from conversational_robot_pkg.database.models import Dialogue, Base
+from lwitch.database.models import Dialogue, Base
 
 
 load_dotenv()

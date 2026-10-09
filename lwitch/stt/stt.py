@@ -30,7 +30,11 @@ def speak_to_text(path_to_file: str) -> dict:
 
 
 if __name__ == "__main__":
-    path = "/home/a_nyone/apps/ros2_ws/lwitch/lwitch/stt/record.wav"
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Transcribe an audio file locally.")
+    parser.add_argument("path", help="Path to an audio file")
+    path = parser.parse_args().path
 
     txt = speak_to_text(path)
     print(

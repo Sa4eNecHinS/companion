@@ -8,7 +8,7 @@ from lwitch.waf.security.sql_detector import detect_sql_injection
 from lwitch.waf.security.sanitizer import sanitize_input
 from lwitch.waf.security.rate_limiter import RateLimiter
 from lwitch.waf.utils.logger_config import setup_file_logger
-from lwitch.waf.database.crud import create_dialogue
+from lwitch.database.crud import create_dialogue
 
 
 class WafFilterNode(Node):
